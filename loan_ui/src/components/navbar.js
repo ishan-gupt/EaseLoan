@@ -1,7 +1,7 @@
-import React, { Component }  from 'react';
-import {Navbar,Nav ,NavDropdown,Container} from 'react-bootstrap';
+import React from 'react';
+import {Navbar,Nav,Container} from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+
 function navbar() {
     
   const navigate = useNavigate();

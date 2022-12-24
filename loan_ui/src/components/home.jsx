@@ -1,9 +1,8 @@
-import React, { Component }  from 'react';
+import React from 'react';
 import { useState } from "react";
 import { Form,Card, Button } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 const Home = () =>{
     const navigate = useNavigate();
     const [email,setEmail] = useState("")

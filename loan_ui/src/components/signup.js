@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import React, { Component }  from 'react';
+import React from 'react';
 import { Form,Card, Button } from "react-bootstrap";
 import axios from "axios";
-import { height } from "@mui/system";
+
 const cardcss = {
     height:"720px",
     padding:"70px",
@@ -19,7 +19,7 @@ function Signup()
         lastname: "",
         password: "",
     });
-    const { email, firstname, lastname, password, confirmpassword } = user;
+    const { email, firstname, lastname, password } = user;
     const onInputChange = (e) => {
         const { name, value } = e.target;
         setFormValues({ ...formValues, [name]: value });
@@ -53,16 +53,16 @@ function Signup()
     const [formErrors, setFormErrors] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
 
-    const handleChange = (e) => {
+    /*const handleChange = (e) => {
         const { name, value } = e.target;
         setFormValues({ ...formValues, [name]: value });
-    };
+    };*/
 
-    const handleSubmit = (e) => {
+    /*const handleSubmit = (e) => {
         e.preventDefault();
         setFormErrors(validate(formValues));
         setIsSubmit(true);
-    };
+    };*/
 
     useEffect(() => {
         console.log(formErrors);

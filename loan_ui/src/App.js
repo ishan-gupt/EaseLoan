@@ -1,5 +1,5 @@
 import './App.css';
-import React, { Component }  from 'react';
+import React  from 'react';
 import Home from './components/home';
 import {BrowserRouter as Router,Route,Routes} from "react-router-dom";
 import Loanform from './components/loanform';
