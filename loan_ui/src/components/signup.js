@@ -4,7 +4,7 @@ import { Form,Card, Button } from "react-bootstrap";
 import axios from "axios";
 
 const cardcss = {
-    height:"720px",
+    height:"640px",
     padding:"70px",
     width:"600px",
     margin:"80px auto",
@@ -23,7 +23,7 @@ function Signup()
     const onInputChange = (e) => {
         const { name, value } = e.target;
         setFormValues({ ...formValues, [name]: value });
-        console.log(e.target.value);
+        //console.log(e.target.value);
         setUser({ ...user, [e.target.name]: e.target.value });
     };
     const FormHandle = (e) => {
@@ -53,16 +53,6 @@ function Signup()
     const [formErrors, setFormErrors] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
 
-    /*const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormValues({ ...formValues, [name]: value });
-    };*/
-
-    /*const handleSubmit = (e) => {
-        e.preventDefault();
-        setFormErrors(validate(formValues));
-        setIsSubmit(true);
-    };*/
 
     useEffect(() => {
         console.log(formErrors);
@@ -70,7 +60,7 @@ function Signup()
             console.log(formValues);
         }
     }, [formErrors]);
-    const validate = (values) => {
+    /*const validate = (values) => {
         const errors = {};
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
         if (!values.email) {
@@ -93,12 +83,12 @@ function Signup()
         }
         if (!values.confirmpassword) {
             errors.confirmpassword = "Confirmpassword is required";
-        } else if (values.confirmpassword != values.password) {
+        } else if (values.confirmpassword !== values.password) {
             errors.confirmpassword = "ConfirmPassword is not matched";
         }
         return errors;
     };
-  
+  */
   return (
 
     <Card style={cardcss}>
@@ -120,10 +110,6 @@ function Signup()
       <Form.Group>
       <Form.Label>Password</Form.Label>
           <Form.Control style={{marginBottom:"10px"}} id="password" type="password" name="password"  value={formValues.password}  onChange={(e) => onInputChange(e)} required/>
-      </Form.Group>
-      <Form.Group>
-      <Form.Label>Confirm Password</Form.Label>
-          <Form.Control style={{marginBottom:"10px"}} id="confirmPassword" name="confirmPassword" type="password" value={formValues.confirmpassword}  onChange={(e) => onInputChange(e)} required/>
       </Form.Group>
          <Button style={{marginBottom:"10px"}} variant="primary" className="mt-3" onClick={FormHandle} disabled={!firstname || !email || !password || !lastname}>Submit</Button>
         </Form>

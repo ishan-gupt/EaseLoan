@@ -8,13 +8,7 @@ const Home = () =>{
     const [email,setEmail] = useState("")
     const [password,setPassword] = useState("")
     const[user,setUser] = useState([])
-    /*
-    useEffect(() => {
-      if (localStorage.getItem("user")){
-        navigate("/dashboard");  
-      }
-    },[])
-    */
+  
     const cardcss = {
       height:"560px",
       padding:"70px",
@@ -36,7 +30,7 @@ const Home = () =>{
         }
       )
       .then((res) => {
-        if(res.status == 200 || res.status == 201){
+        if(res.status === 200 || res.status === 201){
           localStorage.setItem("token",res.data.jwt);
           localStorage.setItem("user",email);
           localStorage.setItem("fname",res.data.user.firstname)

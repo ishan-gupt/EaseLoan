@@ -2,7 +2,7 @@ import React from 'react';
 import {Navbar,Nav,Container} from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
-function navbar() {
+function navbar(props) {
     
   const navigate = useNavigate();
     const signoutfunc = () => {
@@ -13,7 +13,7 @@ function navbar() {
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand href="#home">Dashboard</Navbar.Brand>
+        <Navbar.Brand href="#home">{props.name}</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto"></Nav>

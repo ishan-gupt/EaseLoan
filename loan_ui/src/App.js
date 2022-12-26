@@ -1,12 +1,12 @@
-import './App.css';
 import React  from 'react';
 import Home from './components/home';
 import {BrowserRouter as Router,Route,Routes} from "react-router-dom";
 import Loanform from './components/loanform';
 import Signup from './components/signup';
 import Profile from './components/profile';
-import Loanlist from  './components/loanstatus';
+import Loanlist from  './components/loanstatus.js';
 import Dashboard from './components/dashboard';
+import "./App.css"
 
 function App() {
     document.title = "EaseLoan"

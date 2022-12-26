@@ -1,33 +1,15 @@
-import React, { Component }  from 'react';
+import React  from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import {Col,Container,Row,Card} from "react-bootstrap";
-import { useEffect } from 'react';
+import {Card} from "react-bootstrap";
+//import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from "./navbar"
 import axios from "axios";
+import "./cardform.css"
 
 function Loanform() {
-
   const navigate = useNavigate();
-  /*
-  useEffect(() => {
-    if(!localStorage.getItem("token") || !localStorage.getItem("user")){
-      navigate("/signin");  
-    }
-  },[])
-  */
-  const signout = () => {
-    localStorage.removeItem("user");
-    localStorage.removeItem("token");
-    navigate("/signin");
-  }
-  const cardcss = {
-    height:"580px",
-    padding:"70px",
-    width:"500px",
-    margin:"80px auto",
-  }
 const FormHandle=(e)=>{
   const loginFormData = new FormData();
   loginFormData.append("ApplicantIncome", document.getElementById('ApplicantIncome').value)
@@ -40,48 +22,31 @@ const FormHandle=(e)=>{
   loginFormData.append("Married", document.getElementById('Married').value)
   loginFormData.append("Education", document.getElementById('Education').value)
   loginFormData.append("Gender", document.getElementById("Gender").value)
-  var term=0;
-  var amt=document.getElementById('LoanAmount').value;
-if(document.getElementById('Loan_Amount_Term').value==240){
-  term=0.5
-}
-else if(document.getElementById('Loan_Amount_Term').value==360){
-  term=1
-}
-  sendreq(loginFormData,term,amt)
-  console.log(loginFormData)
- 
+  sendreq(loginFormData) 
+  navigate("/dashboard")
 }
 
-
-var res="";
-  const sendreq=(data,term,amt)=> {
+  const sendreq=(data)=> {
     // store the states in the form data
       // make axios post request
-      axios({
-        method: "post",
-        url: "http://127.0.0.1:5000/predict",
-        data: data,
-        headers: { "Content-Type": "multipart/form-data" },
-      })
-        .then(function (response) {
-          //handle success
-          navigate("/dashboard")
-          res = response;
-          console.log(response)
-          
-          })
-        .catch(function (response) {
-          //handle error
-          console.log(response);
-        });
+
+        axios.post("http://127.0.0.1:5000/predict", data).then(
+          (response) => {
+              console.log(response);
+              alert("User Added Successfully");
+              },
+          (error) => {
+              console.log(error);
+              alert("Operation failed");
+          }
+          );
   }
 
   
   return (
     <div>
-      <Navbar/>
-      <Card style={cardcss}>
+      <Navbar name="Apply Loan"/>
+      <Card className='cardcs'>
         <Form >
         <Form.Group className="mb-3"  controlId='ApplicantIncome'>
           <Form.Label>Amount</Form.Label>

@@ -7,13 +7,6 @@ import './dashboard.css';
 function Dashboard() {
   
   const navigate = useNavigate();
-  /* 
-  useEffect(() => {
-    if(!localStorage.getItem("token") || !localStorage.getItem("user")){
-      navigate("/signin");  
-    }
-  },[])
-  */
  
   const applybutton = (e) =>{
     navigate("/loanform");
@@ -24,7 +17,7 @@ function Dashboard() {
   
   return (
     <div className="App">
-      <Navbar/>
+      <Navbar name="DashBoard"/>
     <div className="duv md-flex flex-row mb-3 align-self-center" style={{margin: "auto", display:"flex", alignItems:"center", justifyContent:"center"}}>
     <Card onClick={applybutton} className="cardm">
       <Card.Body>
