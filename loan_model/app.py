@@ -32,16 +32,18 @@ def create_cursor(conn):
         print(e)
     return None
 
-def insert_data(cursor, id,amt, emimonth , status):
+def insert_data(cursor, id,amt, emimonth , status,email):
     try:
-        sql = "INSERT INTO loan_data(id,amount,emimonths,status) VALUES(%s,%s,%s,%s)"
-        val = (id,amt, emimonth, status)
+        sql = "INSERT INTO loan_data(id,amount,emimonths,status,user) VALUES(%s,%s,%s,%s,%s)"
+        val = (id,amt, emimonth, status,email)
         cursor.execute(sql, val)
     except Error as e:
         print(e)
 
-def fetch_data(cursor):
-    cursor.execute('SELECT * FROM loan_data')
+def fetch_data(cursor,param):
+    sql='SELECT * FROM loan_data where user = %s'
+    val=[(param)]
+    cursor.execute(sql,val)
     rows = cursor.fetchall()
     return rows
 
@@ -56,14 +58,13 @@ def close_connection(cursor, conn):
 with open(r"E:\CodeBase\Loan\loanmodel.pkl", 'rb') as f:
     model = pickle.load(f)
 
-@app.route("/predict", methods=["POST"])
-def predict():
+@app.route("/predict/<param>", methods=["POST"])
+def predict(param):
     int_features = [int(x) for x in request.form.values()]
     final_features = [np.array(int_features)]
     feature=np.array(int_features)
     prediction = model.predict(final_features)
     print(prediction);
-
     output = round(prediction[0], 2)
     #prediction_text = "{}".format(output)
     ide = ''.join([random.choice(string.ascii_letters + string.digits) for n in range(32)])
@@ -86,18 +87,19 @@ def predict():
 
     conn = create_connection();
     cursor=create_cursor(conn);
-    insert_data(cursor,ide,amt,month,stat)
+    insert_data(cursor,ide,amt,month,stat,param)
     commit_changes(conn)
     close_connection(cursor,conn)
     return 'Sucess'
 
 
 
-@app.route('/data', methods=['GET'])
-def results():
+@app.route('/data/<param>', methods=['GET'])
+def results(param):
+    print(type(param))
     conn = create_connection()
     cursor = conn.cursor()
-    rows = fetch_data(cursor)
+    rows = fetch_data(cursor,param)
     cursor.close()
     conn.close()
     return jsonify(rows)
