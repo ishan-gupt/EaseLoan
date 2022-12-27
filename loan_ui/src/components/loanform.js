@@ -25,15 +25,15 @@ const FormHandle=(e)=>{
   sendreq(loginFormData) 
   navigate("/dashboard")
 }
-
+var user=localStorage.getItem("user");
   const sendreq=(data)=> {
     // store the states in the form data
       // make axios post request
 
-        axios.post("http://127.0.0.1:5000/predict", data).then(
+        axios.post("http://127.0.0.1:5000/predict/"+user, data).then(
           (response) => {
               console.log(response);
-              alert("User Added Successfully");
+              alert("Loan Applied Successfully,Check results in Loan Status");
               },
           (error) => {
               console.log(error);
@@ -49,17 +49,17 @@ const FormHandle=(e)=>{
       <Card className='cardcs'>
         <Form >
         <Form.Group className="mb-3"  controlId='ApplicantIncome'>
-          <Form.Label>Amount</Form.Label>
+          <Form.Label>Applicant Income</Form.Label>
           <Form.Control type="Account Number" name='ApplicantIncome' />
         </Form.Group>
     
         <Form.Group className="mb-3"  controlId="CoaplicantIncome">
-          <Form.Label>CoaplicantIncome</Form.Label>
+          <Form.Label>Co AplicantIncome</Form.Label>
           <Form.Control type="Account Number" name='CoaplicantIncome'/>
         </Form.Group>
 
         <Form.Group className="mb-3"  controlId='LoanAmount'>
-          <Form.Label>LoanAmount</Form.Label>
+          <Form.Label>Loan Amount</Form.Label>
           <Form.Control type="Loan Amount" name='LoanAmount'/>
         </Form.Group>
 
@@ -94,9 +94,9 @@ const FormHandle=(e)=>{
           <Form.Label>Geographical Area</Form.Label>
           <Form.Select aria-label="Default select example">
             <option>--Select--</option>
-            <option value="2">urban</option>
-                <option value="1">semiurban</option>
-                <option value="0">rural</option>
+            <option value="2">Urban</option>
+                <option value="1">Semi Urban</option>
+                <option value="0">Rural</option>
           </Form.Select>
         </Form.Group> 
 

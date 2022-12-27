@@ -21,14 +21,16 @@ function Dashboard() {
     <div className="duv md-flex flex-row mb-3 align-self-center" style={{margin: "auto", display:"flex", alignItems:"center", justifyContent:"center"}}>
     <Card onClick={applybutton} className="cardm">
       <Card.Body>
-        <Card.Title style={{fontSize:"3.5vw"}}>ApplyLoan</Card.Title>
+        <Card.Title style={{fontSize:"3.5vw",textAlign: "center",
+  alignSelf: "center"}}>ApplyLoan</Card.Title>
         <Card.Text>
         </Card.Text>
       </Card.Body>
     </Card>
     <Card onClick={statusbutton} className="cardm" style={{}}>
       <Card.Body>
-        <Card.Title style={{fontSize:"3.5vw",opacity:"0.9"}}>Loan Status</Card.Title>
+        <Card.Title style={{fontSize:"3.5vw",opacity:"0.9",textAlign: "center",
+  alignSelf: "center"}}>Loan Status</Card.Title>
         <Card.Text>
         </Card.Text>
       </Card.Body>

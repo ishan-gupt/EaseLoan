@@ -3,8 +3,19 @@ import { Button, Card,Form,Table} from "react-bootstrap";
 //import { useNavigate } from 'react-router-dom';
 import Navbar from "./navbar";
 import axios from 'axios';
+
 function Loanlist(){
-    
+    var user=localStorage.getItem("user");
+        const [data, setData] = useState([]);
+        var myHeaders = new Headers();
+        myHeaders.append("Access-Control-Allow-Origin", "*");
+        myHeaders.append("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,PATCH,OPTIONS");
+    useEffect(() => {
+        axios.get('http://127.0.0.1:5000/data/'+user)
+          .then(res => {
+            setData(res.data);
+          })
+      }, []);
     const divcss = {
         padding:"40px 10rem"
     }
@@ -13,7 +24,7 @@ function Loanlist(){
         height:"70px",
         marginBottom:"20px"
     }
-    
+    console.log(data)
     return(
         <div>
 <Navbar name="Loan Status"/> 
@@ -39,7 +50,13 @@ function Loanlist(){
                 </tr>
             </thead>
             <tbody>
-           
+            {data.map((item,index) => (
+               <tr key={index}>
+                <td>₹ {item[1]}</td>
+                  <td>{item[2]} months</td>
+                  <td>{item[3]}</td>
+               </tr>
+             ))}
             </tbody>
             </Table>
         </div>
